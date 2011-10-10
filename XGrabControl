@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# XGrabControl, part of XGrabControl.
+# (c) 2011, en passant development.
+#
+# This is a simple wrapper script for XGrabControl.
+# Either source it or use it:
+#   source XGrabControl
+# or use it as a program running helper:
+#   XGrabControl program arg1 arg2 ...
+
+
+# Insert ourselves into LD_PRELOAD if we are not there yet.
+if echo $LD_PRELOAD | grep -q "libXGrabControl\.so"
+then
+  echo "XGrabControl: Already in LD_PRELOAD."
+else
+  echo "XGrabControl: Adding to LD_PRELOAD."
+  export LD_PRELOAD="libXGrabControl.so $LD_PRELOAD"
+fi
+
+# If any arguments were given, pass them on to the shell.
+if [ $# -gt 0 ]
+then
+  exec "$@"
+fi
