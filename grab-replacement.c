@@ -34,7 +34,7 @@ int XGrabKeyboard(Display *display, Window grab_window,
   return GrabSuccess;
 }
 
-
+/*
 int XGrabPointer(Display *display, Window grab_window,
                 Bool owner_events, unsigned int event_mask,
                 int pointer_mode, int keyboard_mode,
@@ -63,3 +63,4 @@ int XChangeActivePointerGrab(Display *display, unsigned int event_mask,
 
   return GrabSuccess;
 }
+*/
