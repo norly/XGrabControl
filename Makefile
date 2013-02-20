@@ -15,7 +15,7 @@ $(SOFILE): $(SRCFILES) Makefile
 install: all
 	cp $(SOFILE) $(DESTDIR)/lib/
 	cp XGrabControl $(DESTDIR)/bin/
-	ln -s XGrabControl $(DESTDIR)/bin/noxg
+	ln -sf XGrabControl $(DESTDIR)/bin/noxg
 
 clean:
 	rm -f $(SOFILE)

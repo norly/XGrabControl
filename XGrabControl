@@ -9,7 +9,7 @@
 # or use it as a program running helper:
 #   XGrabControl program arg1 arg2 ...
 
-MYNAME="${0#*/}"
+MYNAME="XGrabControl"
 SONAME=libXGrabControl.so
 
 
@@ -44,4 +44,3 @@ if [ $# -gt 0 ]
 then
   exec "$@"
 fi
-
