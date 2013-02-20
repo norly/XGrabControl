@@ -9,14 +9,34 @@
 # or use it as a program running helper:
 #   XGrabControl program arg1 arg2 ...
 
+MYNAME="${0#*/}"
+SONAME=libXGrabControl.so
+
+
+# Try to find $SONAME
+for n in $PWD "${0%/*}" /usr/lib /usr/local/lib
+do
+  if [ -e "$n/$SONAME" ]
+  then
+    SOPATH="$n/$SONAME"
+    break
+  fi
+done
+
+if [ -z "$SOPATH" ]
+then
+  echo "$MYNAME: Could not find $SONAME. Aborting."
+  exit 1
+fi
+
 
 # Insert ourselves into LD_PRELOAD if we are not there yet.
-if echo $LD_PRELOAD | grep -q "libXGrabControl\.so"
+if echo $LD_PRELOAD | grep -q "$SONAME" # $SONAME is treated as a regexp
 then
-  echo "XGrabControl: Already in LD_PRELOAD."
+  echo "$MYNAME: $SONAME is already in LD_PRELOAD."
 else
-  echo "XGrabControl: Adding to LD_PRELOAD."
-  export LD_PRELOAD="libXGrabControl.so $LD_PRELOAD"
+  echo "$MYNAME: Adding $SOPATH to LD_PRELOAD."
+  export LD_PRELOAD="$SOPATH $LD_PRELOAD"
 fi
 
 # If any arguments were given, pass them on to the shell.
@@ -24,3 +44,4 @@ if [ $# -gt 0 ]
 then
   exec "$@"
 fi
+
