@@ -13,4 +13,4 @@ applications.
 License
 -------
 
-See the file LICENSE.txt for details.
+CC0 1.0 Universal
